@@ -1,0 +1,10 @@
+
+@media (max-width: 640px) {
+  /* Your element selector here */
+  .sm {
+    display: none !important;
+  }
+}
+
+.imgOpacity{
+  background:rgba(150, 213, 234,0);}
