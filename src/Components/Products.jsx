@@ -16,7 +16,7 @@ export default function Products({ cartItem }) {
                         <p className='text-black font-bold'><span>$</span>{125.00 * cartItem}.00</p></div>
 
                 </div>
-                <FaTrashCan onClick={handleRemoveItem}  className='cursor-pointer' size={20} />
+                <FaTrashCan className='cursor-pointer' size={20} />
 
             </div>
             <div className='px-10 mt-2 w-full flex justify-center items-center'>
