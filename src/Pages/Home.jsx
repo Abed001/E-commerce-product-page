@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
+import Cart from '../Components/Cart'
 import { IoCartOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
@@ -10,6 +11,30 @@ export default function Home() {
 
   const [currentIndex, setcurrentIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [addToCart, setAddToCart] = useState(false);
+  const [cartItems, setCartItems] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+
+
+  const handleAddToCart = () => {
+    setCartItems(cartCount);
+    setCartCount(0);
+  }
+  
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+
+  const Increment = () => {
+    setCartCount(prevCartCount => prevCartCount + 1);
+  };
+
+  const Decrement = () => {
+    setCartCount(prevCartCount => Math.max(0, prevCartCount - 1));
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -71,7 +96,9 @@ export default function Home() {
 
 
   return (
-    <> <Navbar />
+    <> <Navbar onCartClick={toggleCart} />
+      {isCartOpen && (
+        <Cart cartItem={cartItems}/>)}
       <div className=' font-bold font-Kumbh flex flex-col justify-center items-start lg:p-20  '>
         <div className=' flex flex-col justify-between items-center gap-x-20 lg:flex-row '>
 
@@ -88,7 +115,7 @@ export default function Home() {
             </div>
           </div>
           {/*product image  on small screen*/}
-          <div style={{ backgroundImage: `url(${slides[currentIndex].url})` }} className='lg:hidden w-full h-[500px] bg-cover bg-center bg-no-repeat duration-500  '></div>
+          <div style={{ backgroundImage: `url(${slides[currentIndex].url})` }} className='lg:hidden w-full h-[250px] bg-cover bg-center bg-no-repeat duration-500  '></div>
 
 
           {/*when clicking on large image the modals open*/}
@@ -115,12 +142,12 @@ export default function Home() {
               {/*slider arrow for desktop light box*/}
 
               {/*slider left right*/}
-              <div className='z-50 shadow absolute  top-[250px] left-[449px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
+              <div className='z-10 shadow absolute  top-[250px] left-[449px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
                 <IoIosArrowBack className='cursor-pointer  hover:text-orange-500' size={20} onClick={nextSlide} />
 
               </div>
 
-              <div className='z-50 shadow absolute  top-[250px] right-[449px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
+              <div className='z-10 shadow absolute  top-[250px] right-[449px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
                 <IoIosArrowForward className='cursor-pointer  hover:text-orange-500' size={20} onClick={prevSlide} />
               </div>
             </div>
@@ -148,15 +175,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className='flex flex-col lg:flex-row lg:gap-x-5 '>
+            <div className=' relative flex flex-col lg:flex-row lg:gap-x-5 '>
               <div className='mb-5 flex justify-around items-center rounded-lg flex-row bg-gray-100 py-2 gap-x-20 lg:max-w-[300px]'>
-                <button className='text-orange-500 text-4xl lg:text-1xl lg:ml-2'>-</button>
-                <span className='text-black text-2xl lg:text-lg'>0</span>
-                <button className='text-orange-500 text-4xl lg:text-1xl lg:mr-2'>+</button></div>
 
-              <button className='mb-5 rounded-lg gap-x-3 bg-orange-500 p-4 text-white flex flex-row justify-center items-center lg:flex-1 lg:max-w-[400px] '>
+                <button onClick={Decrement} className='text-orange-500 text-4xl lg:text-1xl lg:ml-2'>-</button>
+
+                <span className='text-black text-2xl lg:text-lg'>{cartCount}</span>
+                <button onClick={Increment} className='text-orange-500 text-4xl lg:text-1xl lg:mr-2'>+</button></div>
+
+              <button onClick={handleAddToCart} className='  mb-5 rounded-lg gap-x-3 bg-orange-500 p-4 text-white flex flex-row justify-center items-center lg:flex-1 lg:max-w-[400px] '>
                 <IoCartOutline />
                 <span>Add to cart</span></button>
+              <span className={` absolute h-2 w-5 bottom-[820px] right-[75px] lg:bottom-[590px] lg:right-16 flex justify-center items-center text-[10px] bg-orange-500 rounded-full p-2 lg:w-5 lg:h-3`}>{cartItems}</span>
+
             </div>
           </div>
         </div>
@@ -164,12 +195,12 @@ export default function Home() {
         {/*slider arrow for mobile*/}
         <div className='lg:hidden flex flex-row justify-between w-full'>
           {/*slider left right*/}
-          <div className='shadow absolute  top-[312px] left-[400px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
+          <div className='shadow absolute  top-[200px] left-[400px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
             <IoIosArrowForward className='cursor-pointer' size={20} onClick={nextSlide} />
 
           </div>
 
-          <div className=' lg:hidden shadow absolute  top-[312px] right-[400px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
+          <div className=' lg:hidden shadow absolute  top-[200px] right-[400px]  bg-white flex flex-row  items-center justify-around w-12 h-12  rounded-full '>
 
             <IoIosArrowBack className='cursor-pointer' size={20} onClick={prevSlide} />
           </div>
