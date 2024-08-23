@@ -24,15 +24,13 @@ export default {
         Kumbh: 'Kumbh Sans, sans-serif',
       },
       fontSize: {
-        bodycopy: "16px",
+        bodycopy: "15px",
          
       },
       fontWeight: {
-        thin: 100, // Define additional weights if needed
-        light: 300,
-        normal: 400,
-        medium: 500,
-        semibold: 600,
+       
+        normal: 500,
+       
         bold: 700,
       },
     },

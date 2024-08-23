@@ -120,7 +120,7 @@ export default function Home() {
 
           {/*when clicking on large image the modals open*/}
           {isModalOpen && (
-            <div className="sm fixed inset-0 flex items-center justify-center">
+            <div className="z-40 sm fixed inset-0 flex items-center justify-center">
               <div className="absolute inset-0 bg-black opacity-80" onClick={closeModal}></div>
               <div className="relative z-10 p-4">
 
